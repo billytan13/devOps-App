@@ -1,0 +1,33 @@
+html
+  head
+    title= 'L1Ds Application@'+isLoggedIn
+  style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Application Dashboard"
+      - var id=1     
+      table
+        tr
+          td= "No."
+          td= "Application Name"
+          td= "Description"
+          td= "Current Release Nunmber"
+          td= "Product baseline (PBL)"
+        for app in appList
+          tr 
+            td #{id++} 
+            td 
+               a(href='/getApp/'+app.Appname) #{app.Appname}
+            td
+              = app.Appdesc
+            <td style="border-left: 20px solid #{app.AppColour}"> 
+              = app.AppRel
+            td= app.AppPBL
+      p
+      h6(class="pb-2 border-bottom" style="color: white; text-align: left")="Next Step"
+      p(style="color: white; text-align: left")
+  
+        a="Click on the respective Application Name to update the devtest environment OR  "
+        a(href="/home")=" Home" 
+include footer.pug

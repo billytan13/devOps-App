@@ -1,0 +1,48 @@
+html
+  head
+    title= "L1Ds Password Change@"+isLoggedIn
+  style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Assign Group for user: "+Uname
+
+      form(class="row g-3" method="post" action="assign_group")
+        if error 
+          p(class="alert alert-danger" style="text-align:center; color:black")=error
+
+
+        div(class="row-auto" style="color: white; text-align: left ")
+           div(class="col-auto") 
+              a()="User Name"  
+              input( type="text" class="form-control" name="Uname" value=Uname placeholder=Uname readonly)
+        h4(class="pb-2 border-bottom" style="color: white; text-align: left")="Current Associated Group(s)"
+          - var id=1     
+          table
+            tr
+              td= "No."
+              td= "Group Name"
+            for app in gList
+              tr 
+                td #{id++} 
+                td #{app.Grpname}
+          p
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+              if allgList
+                  a()="Available Group ___ "
+                     select(name="Gname" value="" required pattern="[a-z,A-Z]{1}*")  
+                        each grp in allgList
+                          option(value=grp.Grpname) #{grp.Grpname}    
+
+        h6(class="pb-2 border-bottom" style="color: white; text-align: left")="Assignment"  
+          div(class="row-auto" style="color: white; text-align: left ")  
+            div(class="col-auto") 
+              select(name='workonAction' value='add')
+                option(value='add') Add selected Group
+                option(value='remove') Remove Selected Group 
+          p
+            div(class="row-auto")
+              button(type="submit" class="btn-large btn-primary mb-3")="Confirm"
+      a(href="/home")="Cancel"  
+include footer.pug

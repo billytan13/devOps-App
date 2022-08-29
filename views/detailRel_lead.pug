@@ -1,0 +1,184 @@
+html
+  head
+    title= "L1Ds Release for: " + app.Crname + "/" + isLoggedIn
+    style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Release Request Details"
+      if error 
+         p(class="alert alert-danger")=error 
+      if msg==="code ok"
+        
+      else
+         p(class="alert alert-danger")="Please demote request to WIP for code merge  with [ "+msg+ " ]. This is to ensure the existing UAT-onwards released request integrity."
+          
+
+      form(class="row g-3" method="post" action="workon_Rel")
+        div(class="row-auto"  style="color: white; text-align: left; border-left: 25px solid "+app.CrColour)
+
+           div(class="col-auto")  
+              a()="Release Name"
+              input(type="text" class="form-control" name="Crname" value=app.Crname placeholder=app.Crname readonly )
+              a()="External Release Name"
+              input(type="text" class="form-control" name="CrXname" value=app.CrXname placeholder=app.CrXname readonly )
+              a()="Application"
+              input(type="text" class="form-control" name="Crapp" value=app.Crapp placeholder=app.Crapp readonly)
+              a()="Description"
+              if app.Crdesc === null  || app.Crdesc === ''
+                textarea(rows='2' style='width: 100%' name='Crdesc1' placeholder= "eg. Please give a description")
+              else 
+                textarea(rows='4' style='width: 100%'   name='Crdesc1'  value=app.Crdesc placeholder=app.Crdesc )
+
+              div(class="row-auto" style="color: white; text-align: left")
+               div(class="col-auto") 
+               a()="Release Type  "    
+              input(type="text" class="form-control" name="CrRelType" value=app.CrRelType placeholder=app.CrRelType readonly)
+
+              div(class="row-auto" style="color: white; text-align: left")
+
+             
+              a()="Code base (Product Release BL)"
+              input(type="text" class="form-control" name="CrCodebase" value=app.Crcodebase placeholder=app.CrCodebase readonly)
+              a()="Current State"
+              input(type="text" class="form-control" name="CrState" value=app.Crstate placeholder=app.CrState readonly)
+
+           div(class="col-auto") 
+              if planList
+                  a()="MVP Plan item......    "
+                  if (app.CrXplan === null || app.CrXplan ==="" )              
+                     select(name='CrXplan' value="" required pattern="[a-z,A-Z]{1}*")  
+                        option(value=CrXplan) 
+                        each plan in planList
+                           if (app.CrXplan !== plan.MVPname)
+                              option(value=plan.MVPname) #{plan.MVPname}    
+                  else
+                     select(name='CrXplan' value=app.CrXplan required)  
+                        option(value=CrXplan) #{app.CrXplan}
+                        each plan in planList
+                           if (app.CrXplan !== plan.MVPname)
+                              option(value=plan.MVPname) #{plan.MVPname}    
+           div(class="col-auto") 
+               a()="Deployment Type..   "        
+                  if (app.CrDeployType === "Normal")
+                     select(name='CrDeployType' value="Normal")
+                        option(value="Normal") Normal
+                        option(value="FastTrack") Fast Track      
+                  else        
+                     select(name='CrDeployType' value="FastTack")
+                        option(value="FastTrack") Fast Track      
+                        option(value="Normal") Normal
+           div(class="col-auto")             
+              a()="Action to take next "        
+              if msg==="code ok"                                     
+                  if (app.CrState ==='review')  
+                        select(name='workonAction' value='test')
+                           option(value='test') Send for Test
+                           option(value='wip') Back to Development
+                           option(value='kiv') KIV
+                  if (app.CrState ==='test')
+                        select(name='workonAction' value='uat')
+                           option(value='uat') Send for UAT
+                           option(value='wip') Back to Development
+                           option(value='review') Back to Review
+                  if (app.CrState ==='uat')
+                        select(name='workonAction' value='deliver')
+                           option(value='deliver') Send for delivery
+                           option(value='wip') Back to Development
+                           option(value='kiv') KIV
+                           option(value='imo') In Memory Of
+                  if (app.CrState ==='deliver')
+                        select(name='workonAction' value='close')
+                           option(value='close') Close Release Request
+                           option(value='bwip') Back to Development
+                           option(value='buat') UAT
+                  if (app.CrState ==='kiv')
+                        select(name='workonAction' value='wip')
+                           option(value='wip') Back to Development
+              else
+                  if (app.CrState ==='review')                      
+                        select(name='workonAction' value='wip')
+                           option(value='wip') Back to Development
+                           option(value='kiv') KIV
+                  if (app.CrState ==='test')                        
+                        select(name='workonAction' value='wip')
+                           option(value='wip') Back to Development
+                           option(value='kiv') KIV 
+                  if (app.CrState ==='uat')
+                        select(name='workonAction' value='deliver')
+                           option(value='deliver') Send for delivery
+                           option(value='wip') Back to Development
+                           option(value='kiv') KIV
+                  if (app.CrState ==='deliver')
+                        select(name='workonAction' value='close')
+                           option(value='close') Close Release Request                           
+                           option(value='buat') UAT
+                  if (app.CrState ==='kiv')
+                        select(name='workonAction' value='wip')
+                           option(value='wip') Back to Development
+
+        if CrState==="review" 
+            if Crsonastatus!=='' && Crsonastatus!== null 
+              div(class="row-auto")
+                div(class="col-auto") 
+                  button(type="submit" class="btn-large btn-primary mb-3")="Apply"   
+                   
+        else                                                                            
+              div(class="row-auto")
+                div(class="col-auto") 
+                  button(type="submit" class="btn-large btn-primary mb-3" )="Apply"
+                  //<input type="submit" value="Apply" onclick="self.close()">
+
+
+
+        h4(class="pb-2 border-bottom" style="color: lime; text-align: left")="Code Scan"
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              if app.Crsonastatus!=='' && app.Crsonastatus!== null
+                a()="Sonarqube Scan Result = click on link .......... "
+                <a href=#{app.Crsonastatus}>  #{app.Crsonastatus} </a>
+              else 
+                a()="Sonarqube Scan in progress ........."
+
+        h4(class="pb-2 border-bottom" style="color: lime; text-align: left")="Details"
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Notes"
+              if app.CrNote === null  || app.CrNote === ''
+                textarea(rows='9' style='width: 100%' name='CrNote' placeholder= "Previous notes ..." Readonly)
+              else 
+                textarea(rows='9' style='width: 100%' name='CrNote' placeholder= app.CrNote Readonly )
+                app.Crnote     
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+               textarea(rows='3' style='width: 100%' name='CrNote1' placeholder= "Please provide new notes here...")
+
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Dev Branch"
+              input(type="text" class="form-control" name="CrDevbranch" value=app.CrDevbranch placeholder=app.CrDevbranch readonly)
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Instruction: Dev Branch"
+              input(type="text" class="form-control" name="CrDevInst" value=app.CrDevInst placeholder=app.CrDevInst readonly)                  
+
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Rel Branch (Frozen Code) "
+              input(type="text" class="form-control" name="CrRelbranch" value=app.CrRelbranch placeholder=app.CrRelbranch readonly)
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Instruction: Rel Branch"
+              input(type="text" class="form-control" name="CrRelInst" value=app.CrRelInst placeholder=app.CrRelInst readonly)  
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Iteration #"
+              input(type="text" class="form-control" name="CrRelItr" value=app.CrRelItr placeholder=app.CrRelIter readonly)          
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Creator"
+              input(type="text" class="form-control" name="Crcreator" value=app.Crcreator placeholder=app.Crcreator readonly)  
+              input(type="password"  name="Crdesc" value=app.Crdesc placeholder=app.Crdesc readonly )
+        a(href="/home")="Cancel"       
+
+include footer.pug

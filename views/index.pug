@@ -1,0 +1,126 @@
+html
+  head 
+    title="L1D Service@"+isLoggedIn
+    style
+      include style.css
+  body 
+    if error 
+      p(class="alert alert-danger")=error
+    div(class="container")
+      div(class="row")
+        div(class="col")
+          img(src="img/devops-3.jpg" align = "middle" height=70)
+        div(class="col") 
+          h6(class="pb-2 border-bottom" style="color: white; text-align: right")="L1 DevOps Service v2.0"
+            br  
+            if isLoggedIn
+               small 
+                  a(href="/logout" style="color: cyan; text-align: right")="Logout @ "+isLoggedIn
+                  br
+                  a(href="/changepassword" style="color: grey")="Change Password"
+      
+      h6(class="pb-2 border-bottom" style="color: white; font-size: 0.8rem")=""
+        p
+          a()="The storyboard revolves 4 persona (Configuration Manager, PM, Team Members, Team Lead) with their respective activities highlighted in the table. The user stories are sequenced to illustrate the maker is not the checker based on the sequence of the release activities. The L1D Service is designed as the DevOps orchestrator that will govern the DevOps practice, workflow, SCM Usage Model - Dev & Rel branching strategy, Code review, the integrity of the pipeline, and release management tracking. The whole process revolves around  1. Onboard, 2. Plan, 3. Code (CPCP approach), 4. Build, 5. Deliver, 6.Test, 7.Deploy ."
+         
+          //img(src="img/process_model.png" align = "middle" height=420  id="myP")
+      p
+      h6(class="pb-2 border-bottom" href="/kanban" style="color:white")="Board"  
+      a(href="/home" style="color: white; text-align: right")=" Refresh Screen  |" 
+      a(href="/kanban" style="color: cyan; text-align: right")="|  Kanban Release Overview"
+      a( style="color: white; text-align: right")="__ User Management  :" 
+      a(href="/user_add" style="color: grey")="    Add User   |"
+      a(href="/user_manage" style="color: grey")="|    Manage User   |"
+      a(href="/user_group_add" style="color: grey")="|    Add Group   |"
+      a(href="/user_group_assign" style="color: grey")="|    Assign Group   "
+     
+      div(class="row" style="background-color: steelblue; color: cyan;")
+      - var id=1     
+        table
+          tr
+            td= "Step"
+            td= "Persona"
+            td= "User Story"
+            td= "Action"
+
+          tr
+            td #{id++} 
+            td <font color="yellow"> Config Manager </font>
+            td <font color="grey">I want to create new application data for project on-boarding.
+            td 
+                a(href="/create_App" style="color: yellow")="Create New Application"
+          tr
+            td #{id++} 
+            td <font color="yellow"> Config Manager </font>
+            td <font color="grey">I want to define my application devtest environment information.
+            td 
+                a(href="/list_App" style="color: yellow")="List & Update Application"
+          tr
+            td #{id++} 
+            td <font color="cyan"> PM</font>
+            td <font color="green">I want to create new Release Plan
+            td 
+                a(href="/create_plan" style="color: cyan")="Create New Plan"
+          tr
+            td #{id++} 
+            td <font color="cyan"> PM </font>
+            td <font color="green">I want to view/update new Release Plan
+            td 
+                a(href="/list_plan" style="color: cyan")="Update Plan"
+          tr
+            td #{id++} 
+            td <font color="limegreen"><strong> Dev Member </strong></font>
+            td <font color="orange"> I want to raise a release request to start development after Sprint/Release Planning & <font color="red"> Priority Production Patch </font>
+            td 
+                a(href="/list_App_4rel" style="color: limegreen")="Create New Release Request"        
+          tr
+            td #{id++} 
+            td <font color="olive"> Team Lead </font>
+            td I want to Reject or Approve the release request to Work-in-progress state (WIP).
+            td 
+                a(href="/approve_rel")="Approve Release Request"  
+          tr     
+            td #{id++} 
+            td <font color="limegreen"><strong> Dev Member </strong></font>
+            td <font color="orange"> I want to update (for code merge status) or promote my release request for review .(Pull/Merge Request [code review]) CI Pipeline
+            td 
+                a(href="/list_cr" style="color: limegreen")="Work on Release Request"        
+          tr
+            td #{id++} 
+            td  <font color="olive"> Team Lead </font>
+            td I want to review (Pull/Merge request) before triggering pipeline (CICD).
+            td 
+                a(href="/list_cr4Review")="Review Release Request (Pull/Merge request)"
+          tr
+            td #{id++} 
+            td  <font color="olive"> Team Lead </font>
+            td I want to promote release request to UAT (New Product Baseline)
+            td 
+                a(href="/list_cr4UAT")="Promote to UAT"        
+          tr
+            td #{id++} 
+            td  <font color="olive"> Team Lead </font>
+            td I want to update release request status to  UAT, Deliver (Prd) , or Pending Close 
+            td 
+                a(href="/list_cr4StatusUpdate")="Release Request Status update"
+          tr
+            td #{id++} 
+            td  <font color="olive"> Team Lead </font>
+            td I want to close the release request. (New Production Baseline) 
+            td 
+                a(href="/close_cr")="Close Release Request"      
+          tr
+            td #{id++} 
+            td <font color="olive"> Team Lead </font>
+            td <font color="grey"> I want to revive KIV release request. <font color="red">(Exception) </font>
+            td 
+                a(href="/list_cr4Revive")="Revive Release Request"
+          tr
+            td #{id++} 
+            td <font color="olive"> Team Lead </font>
+            td <font color="grey"> I want to view Retired (IMO, Rejected, Close) request.
+            td 
+                a(href="/list_retired")="View Retired Request"
+      p
+
+include footer.pug

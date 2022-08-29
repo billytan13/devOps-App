@@ -1,0 +1,19 @@
+html
+  head 
+    title="L1D Service"
+    style
+      include styleLogin.css
+  body     
+    div(class="login")
+      img(src="img/devops-1a.jpg" style="align-center" )
+      H5(class="pb-2" style="color: white; text-align: center")="L1 DevOps Service V2.0"
+      if error 
+        p(class="alert alert-danger" style="text-align:center; color:yellow")=error
+      form( method="post" action="auth")
+        div(class="row-auto")
+          input(type="text"  name="username" placeholder="Username")
+        div(class="row-auto")
+          input( type="password" name="password" placeholder="Password")
+        div(class="row-auto")
+          button(type="submit" class="btn btn-primary btn-block btn-large")="Sign In"
+

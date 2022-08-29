@@ -1,0 +1,64 @@
+head 
+    title="L1Ds-Create-Rel@"+isLoggedIn
+    style
+      include style.css
+body 
+    div(class="container" style="font-size:0.9rem")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left ")="Step ii of ii. Approve Release Request"
+      if error 
+        p(class="alert alert-danger")=error
+
+      form(class="row g-3" method="post" action="approve_Rel")
+        div(class="row-auto" style="color: white; text-align: left ; border-left: 25px solid "+app.CrColour)
+           div(class="col-auto") 
+              a()="Request / Application Info"  
+              input( type="text" class="form-control" name="Crname" value=app.Crname readonly placeholder=app.Crname)
+              input( type="text" class="form-control" name="Crapp" value=app.Crapp readonly placeholder=app.Crapp)
+              input( type="text" class="form-control" name="Crdesc" value=app.Crdesc readonly placeholder=app.Crdesc)
+              textarea(rows='3' style='width: 100%' name="Crdesc1" value=app.Crdesc placeholder= app.Crdesc)
+              app.Crdesc  
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Notes"        
+              textarea(rows='3' style='width: 100%' name="CrNote" placeholder="  eg. Comments ..."+app.CrRelType+"/"+app.CrDeployType )
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Release Type"    
+           div(class="col-auto")     
+              if app.CrRelType === 'mvp'
+                 select(name="CrRelType" value="mvp")
+                   option(value="mvp") MVP
+                   option(value="pbug") Priority Production Patch
+              else
+                 select(name="CrRelType" value="pbug")
+                   option(value="pbug") Priority Production Patch
+                   option(value="mvp") MVP
+
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Deployment Type"        
+           div(class="col-auto") 
+              if app.CrDeployType === 'FastTrack'
+                 select(name="CrDeployType" value="FastTrack")
+                   option(value="FastTrack") Fast Track   
+                   option(value="Normal") Normal
+              else 
+                 select(name="CrDeployType" value="Normal")   
+                   option(value="Normal") Normal
+                   option(value="FastTrack") Fast Track
+      
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Action       "    
+           div(class="col-auto")     
+              select(name='workonaction' value="approve")
+                option(value="approve") Approve
+                option(value="reject") Reject      
+
+        div(class="row-auto")
+          button(type="submit" class="btn-large btn-primary mb-3")="Submit"
+ 
+        a(href="/home")="Cancel"  
+include footer.pug

@@ -1,0 +1,28 @@
+html
+  head
+    title= "L1Ds Create Group@"+isLoggedIn
+  style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Create Group"
+
+      form(class="row g-3" method="post" action="user_group_add")
+        if error 
+          p(class="alert alert-danger" style="text-align:center; color:black")=error
+
+
+        div(class="row-auto" style="color: white; text-align: left ")
+           div(class="col-auto") 
+              a()="Group Name"  
+              input( type="text" class="form-control" name="Gname" value="" placeholder="note: single word without spaces")
+        div(class="row-auto" style="color: white; text-align: left ")
+           div(class="col-auto") 
+              a()="Short Comment"  
+              input( type="text" class="form-control" name="Uname" placeholder="short comment on group (40 characters)." )
+  
+        div(class="row-auto")
+          button(type="submit" class="btn-large btn-primary mb-3")="Create"
+        a(href="/home")="Cancel"  
+  
+include footer.pug

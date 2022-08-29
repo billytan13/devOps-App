@@ -1,0 +1,13 @@
+html
+  head 
+    title="L1Ds Service@"+isLoggedIn
+  
+    style
+      include style.css
+  body 
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Production Bugfix detected ! Please merge Bugfix from Git ["+ CrRelbranch + "] branch to [Main] branch manually. : "+isLoggedIn
+
+      br
+      a(href="/home")="Home to continue"       
+include footer.pug

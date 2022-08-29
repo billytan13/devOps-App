@@ -1,0 +1,239 @@
+.container {
+  width: 98%;
+  min-width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  font-family: sans-serif;
+}
+
+.kanban-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: sans-serif;
+
+}
+
+.kanban-heading-text {
+  font-size: 1rem;
+  /* background-color: tomato; */
+  color: white;
+  padding: 0.02rem 1.2rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+
+.kanban-block,
+.create-new-task-block {
+  padding: 0.2rem;
+  width: 100%;
+  min-width: 5rem;
+  min-height: 4.5rem;
+  border-radius: 0.1rem;
+}
+
+#todo {
+  padding: 0.2rem;
+  width: 80.5%;
+  max-width: 6.5rem;
+  min-width: 6.5rem;
+  min-height: 4.5rem;
+  border-radius: 0.1rem;
+ }
+
+#todo {
+  color: white;
+  border-color:yellowgreen;
+  border-right-width: 0.rem;
+  background-color: rgb(41, 73, 31);
+  background-blend-mode: lighten;
+}
+
+#inprogress {
+ /* background-color: black; */
+  /* display: none; */
+}
+
+#done {
+  background-color: #018b01;
+  /* display: none; */
+}
+
+#open {
+ /* background-color: black; */
+}
+
+#wip {
+ /* background-color: black; */
+  /* display: none; */
+}
+
+#review {
+ /* background-color: black; */
+ background-color: rgb(74, 63, 97);
+  /* display: none; */
+}
+#test {
+  /* background-color: black; */
+  /* display: none; */
+}
+#uat {
+  /* background-color: black; */
+  background-color: rgb(59, 55, 109);
+  /* display: none; */
+}
+#deliver {
+  /* background-color: black; */
+  /* display: none; */
+}
+#close {
+  /* background-color: black; */
+  background-color: rgb(49, 45, 107);
+  /* display: none; */
+}
+#kiv {
+   /* background-color: black; */
+ 
+  /* display: none; */
+}
+.task {
+ /* background-color: rgb(237, 240, 243);*/
+  margin: 0.4rem 0.1rem 0.2rem 0.1rem;
+  border: 0.0rem solid rgb(132, 170, 197); 
+  border-radius: 0rem;
+  font-size: 0.6rem;
+  padding: 0.2rem 0.2rem 0.1rem 0.4rem;
+  color: black;
+
+}
+
+
+
+.create-new-task-block {
+  display: none;
+  /* display: flex; */
+  background: #033d58;
+  color:cyan;
+  width: 64.4%;
+  flex-direction: column;
+  border: 0.1rem solid black;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  margin: 0.1rem;
+  color: rgb(68, 140, 168);
+}
+
+.form-row-label {
+  width: 20%;
+  min-height: 0.9rem;
+  font-size: 0.8rem;
+  min-width: 6rem;
+  max-width: 6rem;
+  padding: 0.0rem;
+  padding-right: 0.5rem;
+  border: 0.1rem solid black;
+  border-right: 0;
+  border-radius: 0.2rem 0rem 0rem 0.2rem;
+  color: rgb(113, 158, 240);
+}
+
+.form-row-input {
+  border: 0.1rem solid black;
+  background-color: darkkhaki;
+  /* border-radius: 0rem 0.2rem 0.2rem 0rem; */
+  width: 80%;
+  font-size: 0.7rem;
+}
+
+textarea {
+  resize: none;
+}
+
+.form-row-buttons {
+  max-height: 2.6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.02rem;
+}
+
+#edit-button,
+#save-button,
+#cancel-button {
+  margin: 0.02rem 0.1rem 0.1rem 0.1rem;
+  background-color: rgb(44, 90, 109);
+  border-radius: 0.1rem;
+  width: 49.2%;
+  border: 0.15rem solid cyan;
+  padding: 0.2rem 1.7rem;
+  border-radius: 0.3rem;
+  color: white;
+  font-size: 0.9rem;
+}
+
+#edit-button {
+  display: none;
+}
+
+/* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}

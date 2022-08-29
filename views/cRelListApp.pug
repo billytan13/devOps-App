@@ -1,0 +1,31 @@
+html
+  head
+    title= 'L1Ds Release@'+isLoggedIn  
+    style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left" )="Step i of ii. Select Application"
+      - var id=1     
+      table
+        tr
+          td= "No."
+          td= "Application"
+          td= "Description"
+          td= "Current Release Nunmber"
+          td= "Product baseline (PBL)"
+        for app in appList
+          tr
+            td #{id++} 
+            td 
+               a(href='/createRel/'+app.Appname) #{app.Appname}
+            td= app.Appdesc
+            <td style="border-left: 20px solid #{app.AppColour} ;"> 
+              = app.AppRel
+            td= app.AppPBL
+      p
+      h5(class="pb-2 border-bottom" style="color: white; text-align: left")="Next Step"	
+      p( style="color: white; text-align: left")
+        a="Click on the respective Application Name to create a Release Request OR back to "
+        a(href="/home")=" Home" 
+include footer.pug

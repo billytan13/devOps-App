@@ -1,0 +1,17 @@
+{
+  "name": "mini",
+  "version": "1.0.0",
+  "description": "Mini-L1D prototype",
+  "main": "mini-l1d.js",
+  "scripts": {},
+  "author": "Me",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1",
+    "pug": "^3.0.2",
+    "request": "^2.88.2",
+    "string-includes-polyfill": "^1.0.6"
+  }
+}

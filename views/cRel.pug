@@ -1,0 +1,48 @@
+head 
+    title="L1Ds-Create-Rel@"+isLoggedIn
+    style
+      include style.css
+body 
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Step 2. Create Release Request"
+      if error 
+        p(class="alert alert-danger")=error
+
+      form(class="row g-3" method="post" action="Create_Rel")
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Application Selected"  
+              input( type="text" class="form-control" name="Crapp" value=app.Appname readonly)
+              a()="Sticky Pad Colour"
+              input( type="text" class="form-control" name="CrColour" value=app.AppColour readonly)
+              textarea(rows='3' style='width: 100%' name='Appdesc' placeholder= app.Appdesc readonly)
+              app.Appdesc  
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Release Name" 
+              input(type="text" class="form-control" name="Crname" placeholder="To be assigned when approved = _"+app.Appname+"_"+(app.AppRel+1) readonly)
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Release Description"        
+              textarea(rows='3' style='width: 100%' name='Crdesc' placeholder="  eg. This proto application ..." )
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Release Type       "    
+           div(class="col-auto")     
+              select(name='CrRelType' value="mvp")
+                option(value="mvp") MVP
+                option(value="pbug") Priority Production Patch
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Deployment Type       "        
+           div(class="col-auto") 
+              select(name='CrDeployType' value='Normal')
+                 option(value="Normal") Normal
+                 option(value="FastTrack") Fast Track
+
+        div(class="row-auto")
+            button(type="submit" class="btn-large btn-primary mb-3")="Create"
+            //<input type="submit" value="Create" onclick="self.close()">
+
+        a(href="/home")="Cancel"    
+include footer.pug     

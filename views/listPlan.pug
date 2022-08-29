@@ -1,0 +1,36 @@
+html
+  head
+    title= 'L1Ds Application@'+isLoggedIn
+  style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Planned Releases"
+      - var id=1     
+      table
+        tr
+          td= "No."
+          td= "MVP name"
+          td= "Application"
+          td= "Description"
+          td= "Internal Release"
+          td= "External Release Label"
+          td= "State"
+        for app in appList
+          tr 
+            td #{id++} 
+            td 
+               a(href='/getPlan/'+app.MVPname) #{app.MVPname}
+            td= app.MVPapp
+            td= app.MVPdesc
+            td
+              a(href='/getRelAct4review/'+app.MVPasRel) #{app.MVPasRel}
+            td= app.MVPXname
+            td= app.MVPState
+      p
+      h6(class="pb-2 border-bottom" style="color: white; text-align: left")="Next Step"
+      p(style="color: white; text-align: left")
+  
+        a="Click on the respective Application Name to update the devtest environment OR  "
+        a(href="/home")=" Home" 
+include footer.pug

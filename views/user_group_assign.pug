@@ -1,0 +1,28 @@
+html
+  head
+    title= 'L1Ds Application@'+isLoggedIn
+  style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="User List"
+      - var id=1     
+      table
+        tr
+          td= "No."
+          td= "User Name"
+          td= "Email"
+        for app in uList
+          tr 
+            td #{id++} 
+            td 
+               a(href='group_assign/'+app.Uname) #{app.Uname}
+            td
+              = app.Uemail
+      p
+      h6(class="pb-2 border-bottom" style="color: white; text-align: left")="Next Step"
+      p(style="color: white; text-align: left")
+  
+        a="Click on the respective User Name to update the account OR  "
+        a(href="/home")=" Home" 
+include footer.pug

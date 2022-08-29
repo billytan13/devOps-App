@@ -1,0 +1,38 @@
+html
+  head 
+    title="L1Ds Service@"+isLoggedIn
+
+    style
+      include style.css
+  body 
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Application: Create"
+      if error 
+        p(class="alert alert-danger")=error
+
+      form(class="row g-3" method="post" action="Create_App")
+        div(class="row-auto" style="color: white; text-align: left" )
+           div(class="col-auto") 
+              a()="Application Name" 
+              input(type="text" class="form-control" name="Appname" placeholder="acronym: eg. proto")
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Application Description"        
+              textarea(rows='3' style='width: 100%' name='Appdesc' placeholder="  eg. This proto application ..." )
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Application Release Number"  
+              input( type="text" class="form-control" name="AppRel" placeholder="eg. 2 , this is the release # that is part of the release label.")
+
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Application Production Baseline (PBL) Release Label"  
+              input( type="text" class="form-control" name="AppPBL" placeholder="eg. proto_2 , <projet_name>_<rel_#>")
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Sticky pad colour"  
+              input( type="text" class="form-control" name="AppColour" placeholder="eg. limegreen, yellow, blue, cyan, green, pink, etc")
+        div(class="row-auto")
+            button(type="submit" class="btn-large btn-primary mb-3")="Create"
+        a(href="/home")="Cancel"   
+include footer.pug

@@ -1,0 +1,302 @@
+html
+  head
+    title= "L1Ds Application@"+isLoggedIn
+    style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Application: Update @ "+ app.Appname 
+      if error 
+        p(class="alert alert-danger")=error   
+      form(class="row g-3" method="post" action="Update_App")
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Application Name (acronym)"
+              input(type="text" class="form-control" name="Appname" value=app.Appname placeholder=app.Appname readonly)
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Application Description"
+              if app.Appdesc === null  || app.Appdesc === ''
+                textarea(rows='3' style='width: 100%' name='Appdesc' placeholder= "eg. Please give a description")
+              else 
+                input( type="text" class="form-control" name="Appdesc1" value=app.Appdesc placeholder=app.Appdesc Readonly)
+                textarea(rows='3' style='width: 100%' name='Appdesc' placeholder= app.Appdesc)
+                app.Appdesc
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Product & Production Release History"
+              textarea(rows='3' style='width: 100%' name='AppPrdBL_history' placeholder= app.AppPrdBL_history Readonly)       
+              app.AppPrdBL_history
+
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Production Runtime Release"  
+              input( type="text" class="form-control" name="AppProduction" value=app.AppProduction placeholder=app.AppProduction readonly)
+
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Sticky Pad Colour"  
+              input( type="text" class="form-control" name="AppColour" value=app.AppColour placeholder=app.AppColour readonly)
+ 
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Application Release Number"  
+              input( type="text" class="form-control" name="AppRel" value=app.AppRel placeholder=app.AppRel readonly)
+
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Application Product Baseline (PBL) Release Label"  
+              input( type="text" class="form-control" name="AppPBL" value=app.AppPBL placeholder=app.AppPBL readonly)    
+        h5(class="pb-2 border-bottom" style="color: lime; text-align: left")="SonarQube Settings"    
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="SonarQube server"  
+              if app.AppSonaQ === null || app.AppSonaQ === ''
+                 input( type="text" class="form-control" name="AppSonaQ" placeholder="eg. https://127.0.0.1:9000/")
+              else
+                  input( type="text" class="form-control" name="AppSonaQ" value=app.AppSonaQ placeholder=app.AppSonaQ)
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Sonar-scanner bin path"  
+              if app.AppSonaS === null || app.AppSonaS === ''
+                 input( type="text" class="form-control" name="AppSonaS" placeholder="eg.  /c/Users/USER/Documents/sonar-scanner/bin")
+              else
+                  input( type="text" class="form-control" name="AppSonaS" value=app.AppSonaS placeholder=app.AppSonaS)
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Sonar Token"  
+              if app.AppSonaToken === null || app.AppSonaToken === ''
+                 input( type="password" class="form-control" name="AppSonaToken" placeholder="eg.  87a3b3c13d5ea8281dee8f9ba84dc120585b08ab")
+              else
+                  input( type="password" class="form-control" name="AppSonaToken" value=app.AppSonaToken placeholder=app.AppSonaToken)
+            div(class="col-auto") 
+              a()="Sonar USer"  
+              if app.AppSonausr === null || app.AppSonausr === ''
+                 input( type="text" class="form-control" name="AppSonausr" placeholder="eg. admin")
+              else
+                  input( type="text" class="form-control" name="AppSonausr" value=app.AppSonausr placeholder=app.AppSonausr)
+
+        h5(class="pb-2 border-bottom" style="color: lime; text-align: left")="SCM Settings"    
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Git Repository"  
+              if app.AppGit === null || app.AppGit === ''
+                 input( type="text" class="form-control" name="AppGit" placeholder="eg. https://127.0.0.1/myrepo/myapp  , format is 'myapp' is your application name")
+              else
+                  input( type="text" class="form-control" name="AppGit" value=app.AppGit placeholder=app.AppGit)             
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Git User"  
+              if app.AppGit_user === null || app.AppGit_user === ''
+                 input( type="text" class="form-control" name="AppGit_user" placeholder="eg. admin")              
+              else
+                 input( type="text" class="form-control" name="AppGit_user"  value=app.AppGit_user placeholder=app.AppGit_user)             
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()="Init Git Repo Folder Structure"        
+           div(class="col-auto") 
+              select(name='initGitRepo' value='No')
+                 option(value="No") No
+                 option(value="Yes") Yes
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Local Git Template folder"  
+              if app.AppWS === null || app.AppWS === ''
+                 input( type="text" class="form-control" name="AppTemplateWS" placeholder="eg. /user/sv_id/workspace/template")
+              else              
+                 input( type="text" class="form-control" name="AppTemplateWS" value=app.AppTemplateWS placeholder=app.AppTemplateWS)
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="OS Executor"  
+              if app.AppWS === null || app.AppWS === ''
+                 input( type="text" class="form-control" name="AppExec" placeholder="eg. /bin/bash")
+              else              
+                 input( type="text" class="form-control" name="AppExec" value=app.AppExec placeholder=app.AppExec)
+                  
+            
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Local Working Depot"  
+              if app.AppWS === null || app.AppWS === ''
+                 input( type="text" class="form-control" name="AppWS" placeholder="eg. /user/sv_id/workspace")
+              else              
+                 input( type="text" class="form-control" name="AppWS" value=app.AppWS placeholder=app.AppWS)
+                
+        h5(class="pb-2 border-bottom"  style="color: cyan; text-align: left")="Environment Settings" 
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Build server" 
+              if app.AppBuildSvr === null || app.AppBuildSvr === ''
+                 input( type="text" class="form-control" name="AppBuildSvr" placeholder="eg. localhost")     
+              else            
+                 input( type="text" class="form-control" name="AppBuildSvr" value=app.AppBuildSvr  placeholder=app.AppBuildSvr)  
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Build server workspace" 
+              if app.AppBuildSvrWS === null || app.AppBuildSvrWS === ''
+                 input( type="text" class="form-control" name="AppBuildSvrWS" placeholder="eg. /tmp/workspace") 
+              else 
+                 input( type="text" class="form-control" name="AppBuildSvrWS" value=app.AppBuildSvrWS placeholder=app.AppBuildSvrWS) 
+
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Test server"  
+              if app.AppTestSvr === null || app.AppTestSvr === ''
+                 input( type="text" class="form-control" name="AppTestSvr" placeholder="eg. localhost1")     
+              else   
+                 input( type="text" class="form-control" name="AppTestSvr" value=app.AppTestSvr placeholder=app.AppTestSvr)       
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Test server workspace"  
+              if app.AppTestSvrWS === null || app.AppTestSvrWS === ''
+                 input( type="text" class="form-control" name="AppTestSvrWS" placeholder="eg. /tmp/workspace")              
+              else
+                 input( type="text" class="form-control" name="AppTestSvrWS"  value=app.AppTestSvrWS placeholder=app.AppTestSvrWS)  
+        
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Binary Repository"  
+              if app.AppBin === null || app.AppBin === ''
+                 input( type="text" class="form-control" name="AppBin" placeholder="eg. http://localhost:8081/repository/nodejs-ex")              
+              else
+                 input( type="text" class="form-control" name="AppBin"  value=app.AppBin placeholder=app.AppBin)  
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Binary User"  
+              if app.AppBin_user === null || app.AppBin_user === ''
+                 input( type="text" class="form-control" name="AppBin_user" placeholder="eg. admin")              
+              else
+                 input( type="text" class="form-control" name="AppBin_user"  value=app.AppBin_user placeholder=app.AppBin_user) 
+        div(class="row-auto" style="color: white; text-align: left")
+            div(class="col-auto") 
+              a()="Binary User Password"  
+              if app.AppBin_user === null || app.AppBin_user === ''
+                 input( type="text" class="form-control" name="AppBin_pw" placeholder="*********")              
+              else
+                 input( type="text" class="form-control" name="AppBin_pw" placeholder="*********") 
+
+        div(class="row-auto" style="color: white; text-align: left")
+           div(class="col-auto") 
+              a()=" Set Binary Repo Password"        
+           div(class="col-auto") 
+              select(name='setbinpw' value='No')
+                 option(value="No") No
+                 option(value="Yes") Yes
+  
+
+
+        h5(class="pb-2 border-bottom"  style="color: cyan; text-align: left")="State Permission Settings"   
+        div(class="row-auto"  style="color: white; text-align: left")
+           div(class="col-auto") 
+              if allgList
+                  a()="Create Rel __ "
+                  if (app.pcreate==="" || app.pcreate=== null)
+                     select(name="pcreate" value=""  required pattern="[a-z,A-Z]{1}*")  
+                        option(value="")
+                        each grp in allgList    
+                           option(value=grp.Grpname) #{grp.Grpname}    
+                  else 
+                     select(name="pcreate" value=app.pcreate  required pattern="[a-z,A-Z]{1}*")  
+                        option(value=app.pcreate) #{app.pcreate}
+                        each grp in allgList    
+                          if (app.popen !== grp.Grpname)
+                             option(value=grp.Grpname) #{grp.Grpname}    
+                  br
+
+                  a()="Open State __ "
+                  if (app.popen==="" || app.popen=== null)
+                     select(name="popen" value=""  required pattern="[a-z,A-Z]{1}*")  
+                        option(value="")
+                        each grp in allgList    
+                           option(value=grp.Grpname) #{grp.Grpname}    
+                  else 
+                     select(name="popen" value=app.popen  required pattern="[a-z,A-Z]{1}*")  
+                        option(value=app.popen) #{app.popen}
+                        each grp in allgList    
+                          if (app.popen !== grp.Grpname)
+                             option(value=grp.Grpname) #{grp.Grpname}    
+                  br
+                  a()="WIP  State ___ "
+                  if (app.pwip==="" || app.pwip=== null)
+                     select(name="pwip" value=""  required pattern="[a-z,A-Z]{1}*")  
+                        option(value="") 
+                        each grp in allgList    
+                           option(value=grp.Grpname) #{grp.Grpname}    
+                  else 
+                     select(name="pwip" value=app.pwip  required pattern="[a-z,A-Z]{1}*")  
+                        option(value=app.pwip) #{app.pwip}
+                        each grp in allgList    
+                          if (app.pwip !== grp.Grpname)
+                             option(value=grp.Grpname) #{grp.Grpname}    
+                  br
+                  a()="Review State_  "
+                  if (app.preview==="" || app.preview=== null)
+                     select(name="preview" value=""  required pattern="[a-z,A-Z]{1}*")  
+                        option(value="")
+                        each grp in allgList    
+                           option(value=grp.Grpname) #{grp.Grpname}    
+                  else 
+                     select(name="preview" value=app.preview  required pattern="[a-z,A-Z]{1}*")  
+                        option(value=app.preview) #{app.preview}
+                        each grp in allgList    
+                          if (app.preview !== grp.Grpname)
+                             option(value=grp.Grpname) #{grp.Grpname}    
+                  br
+                  a()="Test State ___ "
+                  if (app.ptest==="" || app.ptest=== null)
+                     select(name="ptest" value=""  required pattern="[a-z,A-Z]{1}*")  
+                        option(value="")
+                        each grp in allgList    
+                           option(value=grp.Grpname) #{grp.Grpname}    
+                  else 
+                     select(name="ptest" value=app.ptest  required pattern="[a-z,A-Z]{1}*")  
+                        option(value=app.ptest) #{app.ptest}
+                        each grp in allgList    
+                          if (app.ptest !== grp.Grpname)
+                             option(value=grp.Grpname) #{grp.Grpname}    
+                  br
+                  a()="UAT  State ___ "
+                  if (app.puat==="" || app.puat=== null)
+                     select(name="puat" value=""  required pattern="[a-z,A-Z]{1}*")  
+                        option(value="")
+                        each grp in allgList    
+                           option(value=grp.Grpname) #{grp.Grpname}    
+                  else 
+                     select(name="puat" value=app.puat  required pattern="[a-z,A-Z]{1}*")  
+                        option(value=app.puat) #{app.puat}
+                        each grp in allgList    
+                          if (app.puat !== grp.Grpname)
+                             option(value=grp.Grpname) #{grp.Grpname}
+                  br
+                  a()="Deliver  State_ "
+                  if (app.pdeliver==="" || app.pdeliver=== null)
+                     select(name="pdeliver" value=""  required pattern="[a-z,A-Z]{1}*")  
+                        option(value="")
+                        each grp in allgList    
+                           option(value=grp.Grpname) #{grp.Grpname}    
+                  else 
+                     select(name="pdeliver" value=app.pdeliver  required pattern="[a-z,A-Z]{1}*")  
+                        option(value=app.pdeliver) #{app.pdeliver}
+                        each grp in allgList    
+                          if (app.deliver !== grp.Grpname)
+                             option(value=grp.Grpname) #{grp.Grpname}                                 
+                  br
+                  a()="K.I.V. State  __ "
+                  if (app.pkiv==="" || app.pkiv=== null)
+                     select(name="pkiv" value=""  required pattern="[a-z,A-Z]{1}*")  
+                        option(value="")
+                        each grp in allgList    
+                           option(value=grp.Grpname) #{grp.Grpname}    
+                  else 
+                     select(name="pkiv" value=app.pkiv  required pattern="[a-z,A-Z]{1}*")  
+                        option(value=app.pkiv) #{app.pkiv}
+                        each grp in allgList    
+                          if (app.pkiv !== grp.Grpname)
+                             option(value=grp.Grpname) #{grp.Grpname}    
+
+
+        div(class="row-auto")
+            button(type="submit" class="btn-large btn-primary mb-3")="Update"
+        a(href="/home")="Cancel"  
+
+include footer.pug

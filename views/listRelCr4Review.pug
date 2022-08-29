@@ -1,0 +1,41 @@
+html
+  head
+    title= "L1Ds Release@"+isLoggedIn
+  style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Step i of ii. Select Request for "+opType
+      - var id=1     
+      table
+        tr
+          td= "No."
+          td= "Release Name"
+          td= "State"
+          td= "Description"
+          td= "Creator"
+          td= "Codebase"
+          td= "Release Type"
+          td= "Deploy Type"
+          td= "MVP name"
+          td= "MVP Release name"     
+          
+        for app in appList
+          tr
+            td #{id++} 
+            td 
+               a(href='/getRelAct4review/'+app.Crname) #{app.Crname}
+            td= app.CrState
+            td= app.Crdesc
+            td= app.Crcreator
+            td= app.CrCodebase
+            td= app.CrRelType
+            td= app.CrDeployType
+            td= app.CrXplan 
+            td= app.CrXname
+      p
+      h5(class="pb-2 border-bottom" style="color: white; text-align: left")="Next Step"	
+      p( style="color: white; text-align: left")
+        a="Click on the respective Release Name to work on OR back to "
+        a(href="/home")=" Home" 
+include footer.pug

@@ -1,0 +1,32 @@
+html
+  head
+    title= "L1Ds Password Change@"+isLoggedIn
+  style
+      include style.css
+  body
+    div(class="container")
+      h2(class="pb-2 border-bottom" style="color: white; text-align: left")="Create Account"
+
+      form(class="row g-3" method="post" action="user_add")
+        if error 
+          p(class="alert alert-danger" style="text-align:center; color:black")=error
+
+
+        div(class="row-auto" style="color: white; text-align: left ")
+           div(class="col-auto") 
+              a()="User Name"  
+              input( type="text" class="form-control" name="Uname" value="" placeholder="note: single word without spaces")
+        div(class="row-auto" style="color: white; text-align: left ")
+           div(class="col-auto") 
+              a()="Email"  
+              input( type="text" class="form-control" name="Uemail" placeholder="eg. AB.normal@stengg.com" )
+        div(class="row-auto" style="color: white; text-align: left ")
+           div(class="col-auto") 
+              a()="New Password"  
+              input( type="password" class="form-control" name="Upass" pattern="(?=.*)(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters")
+
+        div(class="row-auto")
+          button(type="submit" class="btn-large btn-primary mb-3")="Create"
+        a(href="/home")="Cancel"  
+      
+include footer.pug
